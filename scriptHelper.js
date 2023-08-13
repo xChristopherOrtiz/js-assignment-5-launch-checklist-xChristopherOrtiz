@@ -17,20 +17,20 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     const missionTarget = document.getElementById("missionTarget");
 
     missionTarget.innerHTML = `
-        <h2>Mission Destination</h2>
-        <ol>
-            <li>Name: ${name}</li>
-            <li>Diameter: ${diameter}</li>
-            <li>Star: ${star}</li>
-            <li>Distance from Earth: ${distance}</li>
-            <li>Number of Moons: ${moons}</li>
-        </ol>
-        <img src="${imageUrl}" alt="Mission Destination Image">
+            <h2>Mission Destination</h2>
+            <ol>
+                <li>Name: ${name}</li>
+                <li>Diameter: ${diameter}</li>
+                <li>Star: ${star}</li>
+                <li>Distance from Earth: ${distance}</li>
+                <li>Number of Moons: ${moons}</li>
+            </ol>
+            <img src="${imageUrl}" alt="Mission Destination Image">
     `;  
 }
 
 function validateInput(testInput) {
-   if (testInput.trim() === "") {
+   if (testInput === "") {
         return "Empty";
    } else if (isNaN(testInput)) {
         return "Not a Number";
@@ -39,11 +39,11 @@ function validateInput(testInput) {
    }
 }
 
-function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-   const pilotStatus = validateInput(pilot);
-   const copilotStatus = validateInput(copilot);
-   const fuelStatus = validateInput(fuelLevel);
-   const cargoStatus = validateInput(cargoLevel);
+function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) { 
+    const pilotStatus = validateInput(pilot);
+    const copilotStatus = validateInput(copilot);
+    const fuelStatus = validateInput(fuelLevel);
+    const cargoStatus = validateInput(cargoLevel);
 
    if (pilotStatus === "Empty" || copilotStatus === "Empty" || fuelStatus === "Empty" || cargoStatus === "Empty") {
         alert("All fields are required!");
@@ -54,6 +54,11 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
         alert("Fuel Level and Cargo Mass must be valid numbers!");
         return;
     }
+
+    if (pilotStatus === "Is a Number" || copilotStatus === "Is a Number") {
+        alert("Pilot & Co-Pilot Must be a Name. No Numbers!");
+        return;
+    } 
 
     const faultyItems = document.getElementById("faultyItems");
     const pilotStatusElement = document.getElementById("pilotStatus");
